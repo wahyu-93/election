@@ -8,6 +8,8 @@
                 <div class="card-header">List Kecamatan</div>
 
                 <div class="card-body">
+                    @include('components.alert')
+
                     <form action="" method="GET">
                         <input type="search" name="q" id="q" class="form-control mb-2" placeholder="Pencarian . . ."><hr>
                     </form>
@@ -27,20 +29,21 @@
                                     <td>{{ $kecamatans->firstItem() + $key }}</td>
                                     <td>{{ $kecamatan->kecamatan }}</td>
                                     <td>
-                                        <a href="{{ route('admin.kecamatan.edit', $kecamatan) }}" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="{{ route('admin.kecamatan.destroy', $kecamatan) }}" class="btn btn-danger btn-sm">Hapus</a>
+                                        <form action="{{ route('admin.kecamatan.destroy', [$kecamatan]) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+
+                                            <a href="{{ route('admin.kecamatan.edit', $kecamatan) }}" class="btn btn-success btn-sm">Edit</a>
+                                            <input type="submit" value="Hapus" class="btn btn-danger btn-sm">
+                                        </form>
                                     </td>
                                 </tr>  
                             @empty
-                                
-                            @endforelse
-                         
+                                <h2 class="text-center">Data Tidak Ada . . .</h2>
+                            @endforelse   
                         </tbody>
-
                     </table>
-
                    {{ $kecamatans->links() }}
-
                 </div>
             </div>
         </div>
@@ -62,7 +65,7 @@
                         </div>
         
                         <div class="form-group">
-                            <input type="submit" value="Simpan" class="btn btn-primary btn-sm">
+                            <input type="submit" value="Simpan" class="btn btn-primary btn-sm float-end">
                         </div>
                     </form>
                 </div>

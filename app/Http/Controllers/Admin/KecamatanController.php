@@ -46,10 +46,10 @@ class KecamatanController extends Controller
     {
         Kecamatan::create([
             'hash'  => Str::random(20) . strtotime(date('Y-m-d H:i:s')),
-            'kecamatan' => $request->kecamatan
+            'kecamatan' => ucwords($request->kecamatan)
         ]);
 
-        return redirect()->route('admin.kecamatan.index');
+        return redirect()->route('admin.kecamatan.index')->with('success', 'Data Berhasil Disimpan');
     }
 
     /**
@@ -60,7 +60,7 @@ class KecamatanController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -69,9 +69,9 @@ class KecamatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kecamatan $kecamatan)
     {
-        //
+        return view('wilayah.kecamatan.edit', compact('kecamatan'));
     }
 
     /**
@@ -81,9 +81,17 @@ class KecamatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kecamatan $kecamatan)
     {
-        //
+        $request->validate([
+            'kecamatan' => 'required|unique:kecamatans,kecamatan,' . $kecamatan->id
+        ]);
+
+       $kecamatan->update([
+            'kecamatan' => $request->kecamatan
+       ]);
+
+       return redirect()->route('admin.kecamatan.index')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -92,8 +100,9 @@ class KecamatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kecamatan $kecamatan)
     {
-        //
+        $kecamatan->delete();
+        return back()->with('success', 'Data Berhasil Dihapus');
     }
 }
