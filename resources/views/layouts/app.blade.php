@@ -41,7 +41,16 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('admin.kecamatan.index') }}">Kecamatan</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.desa.index') }}">Desa</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.desa.index') }}">TPS</a></li>
                             </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Kandidat</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Daftar Pemilih</a>
                         </li>
                         
                     </ul>
