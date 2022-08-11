@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Desa;
+use App\Models\Kecamatan;
+use App\Models\Tps;
 use Illuminate\Http\Request;
 
 class TpsController extends Controller
@@ -14,7 +17,11 @@ class TpsController extends Controller
      */
     public function index()
     {
-        //
+        $kecamatans = Kecamatan::get();
+        $desas = Desa::get();
+
+        $tpsList = Tps::with(['desa'])->paginate(15);
+        return view('wilayah.tps.index', compact('kecamatans', 'desas', 'tpsList'));
     }
 
     /**

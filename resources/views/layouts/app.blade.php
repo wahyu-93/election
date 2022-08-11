@@ -41,7 +41,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('admin.kecamatan.index') }}">Kecamatan</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.desa.index') }}">Desa</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.desa.index') }}">TPS</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.tps.index') }}">TPS</a></li>
                             </ul>
                         </li>
 

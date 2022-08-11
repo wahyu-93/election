@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tps extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class);
+    }
 }

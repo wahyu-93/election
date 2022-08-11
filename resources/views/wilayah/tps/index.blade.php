@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'List Desa')
+@section('title', 'List TPS')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">List Desa</div>
+                <div class="card-header">List Tps</div>
 
                 <div class="card-body">
                     @include('components.alert')
@@ -22,22 +22,24 @@
                                 <th>No</th>
                                 <th>Kecamatan</th>
                                 <th>Desa</th>
+                                <th>TPS</th>
                                 <th></th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @forelse ($desas as $key => $desa)
+                            @forelse ($tpsList as $key => $tps)
                                 <tr>
-                                    <td>{{ $desas->firstItem() + $key }}</td>
-                                    <td>{{ $desa->kecamatan->kecamatan }}</td>
-                                    <td>{{ $desa->desa }}</td>
+                                    <td>{{ $tpsList->firstItem() + $key }}</td>
+                                    <td>{{ $tps->desa->kecamatan->kecamatan }}</td>
+                                    <td>{{ $tps->desa->desa }}</td>
+                                    <td>{{ $tps->tps }}</td>
                                     <td>
-                                        <form action="{{ route('admin.desa.destroy', [$desa]) }}" method="POST">
+                                        <form action="{{ route('admin.tps.destroy', [$tps]) }}" method="POST">
                                             @csrf
                                             @method('delete')
 
-                                            <a href="{{ route('admin.desa.edit', $desa) }}" class="btn btn-success btn-sm">Edit</a>
+                                            <a href="{{ route('admin.tps.edit', $tps) }}" class="btn btn-success btn-sm">Edit</a>
                                             <input type="submit" value="Hapus" class="btn btn-danger btn-sm">
                                         </form>
                                     </td>
@@ -47,16 +49,16 @@
                             @endforelse   
                         </tbody>
                     </table>
-                   {{ $desas->links() }}
+                   {{ $tpsList->links() }}
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Tambah desa</div>
+                <div class="card-header">Tambah TPS</div>
                 <div class="card-body">
-                    <form action="{{ route('admin.desa.store') }}" method="POST">
+                    <form action="{{ route('admin.tps.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group mb-2">
@@ -74,9 +76,23 @@
         
                         <div class="form-group mb-3">
                             <label for="desa">Desa</label>
-                            <input type="text" name="desa" id="desa" class="form-control @error('desa') @enderror mb-2" value="{{ old('desa') }}" autofocus>
+                            <select name="desa" id="desa" class="form-control @error('desa') is-invalid @enderror">
+                                <option value="" readonly selected>Pilih desa . . .</option>
+                                @foreach ($desas as $desa)
+                                    <option value="{{ $desa->id }}" {{ $desa->id == old('desa') ? 'selected' : '' }} >{{ $desa->desa }}</option>
+                                @endforeach
+                            </select>
                             
                             @error('desa')
+                                <span class="text-danger text-small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="tps">TPS</label>
+                            <input type="text" name="tps" id="tps" class="form-control @error('tps') @enderror mb-2" value="{{ old('tps') }}">
+                            
+                            @error('tps')
                                 <span class="text-danger text-small">{{ $message }}</span>
                             @enderror
                         </div>
