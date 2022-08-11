@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -40,7 +40,7 @@
                             
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('admin.kecamatan.index') }}">Kecamatan</a></li>
-                                <li><a class="dropdown-item" href="#">Desa</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.desa.index') }}">Desa</a></li>
                             </ul>
                         </li>
                         

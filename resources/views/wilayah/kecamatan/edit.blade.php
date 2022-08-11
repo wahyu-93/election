@@ -1,11 +1,11 @@
 @extends('layouts.app')
-
+@section('title', 'Ubah Kecamatan')
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Tambah Kecamatan</div>
+                <div class="card-header">Ubah Kecamatan</div>
                 <div class="card-body">
                     <form action="{{ route('admin.kecamatan.update', $kecamatan) }}" method="POST">
                         @csrf

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\KecamatanController;
+use App\Http\Controllers\Admin\{ DesaController, KecamatanController };
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function(){
     Route::prefix('wilayah')->group(function(){
         Route::resource('kecamatan', KecamatanController::class);
+        Route::resource('desa', DesaController::class);
     });
 });

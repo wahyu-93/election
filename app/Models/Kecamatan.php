@@ -15,4 +15,9 @@ class Kecamatan extends Model
     {
         return 'hash';
     }
+
+    public function desas()
+    {
+        return $this->hasMany(Desa::class);
+    }
 }
