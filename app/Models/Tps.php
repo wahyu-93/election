@@ -11,6 +11,11 @@ class Tps extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'hash';
+    }   
+
     public function desa()
     {
         return $this->belongsTo(Desa::class);

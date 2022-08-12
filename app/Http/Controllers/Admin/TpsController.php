@@ -8,6 +8,7 @@ use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\Tps;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TpsController extends Controller
 {
@@ -43,7 +44,13 @@ class TpsController extends Controller
      */
     public function store(TpsRequest $request)
     {
-        
+        Tps::create([
+            'hash' => Str::random(20) . strtotime(date('Ymd h:i:s')),
+            'desa_id' => $request->desa,
+            'tps' => $request->tps
+        ]);
+
+        return back()->with('success', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -88,6 +95,8 @@ class TpsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tps = Tps::whereHash($id);
+        $tps->delete();
+        return back()->with('success', 'Data Berhasil Dihapus');
     }
 }

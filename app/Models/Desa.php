@@ -12,6 +12,11 @@ class Desa extends Model
     protected $guarded = ['id'];
     protected $with = ['kecamatan'];
 
+    public function getRouteKeyName()
+    {
+        return 'hash';
+    }
+
     public function kecamatan()
     {
         return $this->belongsTo(Kecamatan::class);

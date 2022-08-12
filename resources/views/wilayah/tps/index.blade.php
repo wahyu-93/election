@@ -87,7 +87,7 @@
 
                         <div class="form-group mb-3">
                             <label for="tps">TPS</label>
-                            <input type="text" name="tps" id="tps" class="form-control @error('tps') @enderror mb-2" value="{{ old('tps') }}">
+                            <input type="number" name="tps" id="tps" class="form-control @error('tps') @enderror mb-2" value="{{ old('tps') }}" maxlength="2">
                             
                             @error('tps')
                                 <span class="text-danger text-small">{{ $message }}</span>
