@@ -22,7 +22,13 @@ class TpsController extends Controller
         $kecamatans = Kecamatan::get();
         $desas = Desa::get();
 
-        $tpsList = Tps::with(['desa'])->paginate(15);
+        if(Request('q')){
+            $tpsList = Tps::with(['desa'])->where('tps', Request('q'))->orwhereRelation('desa', 'desa', 'like', '%' .Request('q'). '%')->paginate();
+        }
+        else {
+            $tpsList = Tps::with(['desa'])->paginate(15);
+        }
+
         return view('wilayah.tps.index', compact('kecamatans', 'desas', 'tpsList'));
     }
 
