@@ -66,7 +66,7 @@
                             <select name="kecamatan" id="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror" onchange="getKecamatan(this)">
                                 <option value="" readonly selected>Pilih Kecamatan . . .</option>
                                 @foreach ($kecamatans as $kecamatan)
-                                    <option value="{{ $kecamatan->id }}" {{ $kecamatan->id == old('kecamatan') ? 'selected' : '' }}>{{ $kecamatan->kecamatan }}</option>
+                                    <option value="{{ $kecamatan->id }}">{{ $kecamatan->kecamatan }}</option>
                                 @endforeach
                             </select>
                             @error('kecamatan')
