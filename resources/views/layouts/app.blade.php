@@ -98,5 +98,7 @@
             @yield('content')
         </main>
     </div>
+
+    @stack('after-script')
 </body>
 </html>

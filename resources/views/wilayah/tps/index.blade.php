@@ -63,10 +63,10 @@
 
                         <div class="form-group mb-2">
                             <label for="kecamatan">Kecamatan</label>
-                            <select name="kecamatan" id="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror">
+                            <select name="kecamatan" id="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror" onchange="getKecamatan(this)">
                                 <option value="" readonly selected>Pilih Kecamatan . . .</option>
                                 @foreach ($kecamatans as $kecamatan)
-                                    <option value="{{ $kecamatan->id }}" {{ $kecamatan->id == old('kecamatan') ? 'selected' : '' }} >{{ $kecamatan->kecamatan }}</option>
+                                    <option value="{{ $kecamatan->id }}" {{ $kecamatan->id == old('kecamatan') ? 'selected' : '' }}>{{ $kecamatan->kecamatan }}</option>
                                 @endforeach
                             </select>
                             @error('kecamatan')
@@ -78,9 +78,6 @@
                             <label for="desa">Desa</label>
                             <select name="desa" id="desa" class="form-control @error('desa') is-invalid @enderror">
                                 <option value="" readonly selected>Pilih desa . . .</option>
-                                @foreach ($desas as $desa)
-                                    <option value="{{ $desa->id }}" {{ $desa->id == old('desa') ? 'selected' : '' }} >{{ $desa->desa }}</option>
-                                @endforeach
                             </select>
                             
                             @error('desa')
@@ -107,3 +104,36 @@
     </div>
 </div>
 @endsection
+
+@push('after-script')
+    <script>
+        function getKecamatan(id)
+        {
+            var desa = document.getElementById('desa')
+            desa.innerHTML = ""
+            desa.add(new Option("Pilih Desa . . . ", ""))
+
+            var xhr = new XMLHttpRequest()
+            var url = "http://localhost:8000/admin/wilayah/get-desa/" + id.value
+
+            xhr.onerror = function(){
+                console.log("Gagal Mengambil Data")
+            }
+
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    if(this.responseText != ''){
+                        var datas = JSON.parse(this.responseText);
+                        
+                        for(let [key, value] of Object.entries(datas)){
+                            desa.add(new Option(`${value}`, `${key}`))
+                        }
+                    }
+                }
+            };
+
+            xhr.open('GET', url, true)
+            xhr.send()  
+        }
+    </script>
+@endpush

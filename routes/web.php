@@ -26,6 +26,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function(){
     Route::prefix('wilayah')->group(function(){
         Route::resource('kecamatan', KecamatanController::class);
         Route::resource('desa', DesaController::class);
+        Route::get('get-desa/{id}', [DesaController::class, 'getDesaByIdKecamatan'])->name('get.desa');
+
         Route::resource('tps', TpsController::class);
     });
 });

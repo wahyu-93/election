@@ -113,4 +113,10 @@ class DesaController extends Controller
         $desa->delete();
         return back()->with('success', 'Data Berhasil Dihapus');        
     }
+
+    public function getDesaByIdKecamatan($id)
+    {
+        $kecamatan = Desa::where('kecamatan_id', $id)->pluck('desa', 'id');
+        return response()->json($kecamatan);
+    }
 }
