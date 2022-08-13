@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\tps\TpsRequest;
+use App\Http\Requests\Admin\tps\UpdateTpsRequest;
 use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\Tps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class TpsController extends Controller
 {
@@ -78,7 +80,11 @@ class TpsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tps = Tps::with('desa')->where('hash',$id)->first();
+        $kecamatans = Kecamatan::get();
+        $desas = Desa::where('kecamatan_id', $tps->desa->kecamatan->id)->get();
+
+        return view('wilayah.tps.edit', compact('kecamatans', 'desas', 'tps'));
     }
 
     /**
@@ -88,9 +94,11 @@ class TpsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTpsRequest $request, $id)
     {
-        //
+        $tps = Tps::findOrFail($id);
+        $tps->update($request->all());
+        return redirect()->route('admin.tps.index')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
