@@ -46,7 +46,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Kandidat</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.kandidat.index') }}">Kandidat</a>
                         </li>
 
                         <li class="nav-item">

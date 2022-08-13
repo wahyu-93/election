@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{ DesaController, KecamatanController, TpsController};
+use App\Http\Controllers\Admin\{ DesaController, KandidatController, KecamatanController, TpsController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +30,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function(){
 
         Route::resource('tps', TpsController::class);
     });
+    
+    Route::resource('kandidat', KandidatController::class);
 });
