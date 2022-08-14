@@ -24,7 +24,7 @@ class KandidatController extends Controller
      */
     public function create()
     {
-        //
+        return view('kandidat.create');
     }
 
     /**
