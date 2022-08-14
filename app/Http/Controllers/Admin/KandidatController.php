@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\kandidat\KetuaStoreRequest;
+use App\Models\Kandidat;
 use Illuminate\Http\Request;
 
 class KandidatController extends Controller
@@ -24,7 +26,8 @@ class KandidatController extends Controller
      */
     public function create()
     {
-        return view('kandidat.create');
+        $kandidats = Kandidat::get();
+        return view('kandidat.create', compact('kandidats'));
     }
 
     /**
@@ -33,7 +36,7 @@ class KandidatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KetuaStoreRequest $request)
     {
         //
     }

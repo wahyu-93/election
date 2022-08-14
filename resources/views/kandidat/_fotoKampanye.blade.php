@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <div class="card-header">Kandidat Wakil</div>
+    <div class="card-header">Foto Kampanye</div>
     
     <form action="{{ route('admin.kandidat.store') }}" method="post" enctype="multipart/form-data">
         @csrf
